@@ -2,15 +2,12 @@
 
 
 {% block content %}
-{% if category_posts %}
 <h1>{{ cats }}  Category  </h1>
-{% for post in category_posts %}
-
 <ul>
+{% for post in category_posts %}
   <li>
-        <a href="{% url 'article_details' post.pk %}">{{ post.title }}</a>  (
-        <a href="{% url 'category' post.category %}">
-            {{ post.category }}</a>)
+        <a href="{% url 'article_details' post.pk %}">{{ post.title }}</a>
+        ({{ post.category }})
          --
         {{ post.author.first_name }}
         {{ post.author.first_name }} --
@@ -22,10 +19,8 @@
         <br>
         {{ post.body|safe|slice:":120"}}
     </li>
-</ul>
-{% endfor %}
-{% else %}
-<h2>Sorry this page doesnt exist</h2>
-{% endif %}
 
+    {% end
+{% endfor %}
+</ul>
 {% endblock %}

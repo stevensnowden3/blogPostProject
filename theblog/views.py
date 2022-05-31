@@ -14,10 +14,10 @@ class HomeView(ListView):
     template_name = 'home.html'
     # ordering = ['-id']
     ordering = ['-created_at']
-    
+
 def CategoryView(request,cats):
     category_posts = Post.objects.filter(category=cats)
-    return render(request, 'category.html', {'cats':cats, 'category_posts':category_posts})
+    return render(request, 'category.html', {'cats':cats.title(), 'category_posts':category_posts})
 
 class ArticlaDetailView(DetailView):
     model = Post
