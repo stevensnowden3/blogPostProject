@@ -1,5 +1,5 @@
 from django.urls import include, path
-from .views import AddPostView, CategoryView, HomeView, ArticlaDetailView, UpdatePostView, DeletePostView, AddCategoryView
+from .views import AddPostView, CategoryView, HomeView, ArticlaDetailView, UpdatePostView, DeletePostView, AddCategoryView, LikeView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -14,6 +14,8 @@ urlpatterns = [
     path('article/edit/<int:pk>', UpdatePostView.as_view(), name="update_post"),
     path('article/<int:pk>/delete', DeletePostView.as_view(), name="delete_post"),
     path('category/<str:cats>/', CategoryView, name="category"),
+    path('like/<int:pk>/', LikeView, name="like_post"),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

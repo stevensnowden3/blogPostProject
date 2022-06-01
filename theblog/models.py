@@ -26,6 +26,11 @@ class Post(models.Model):
     body = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     category = models.CharField(max_length=200, default='Testing')
+    likes = models.ManyToManyField(User, related_name='blog_bost')
+
+
+    def total_likes(self):
+        return self.likes.count()
 
 
 
