@@ -11,6 +11,12 @@
 {{ form.as_p }}
 
 <button class="btn btn-secondary"> Post</button> 
+
+    <script>
+        var name =  "{{ user.id }}"
+        document.getElementById("admin").value = name;
+    </script>
+
 {% else %}
 <Strong>you are not ALLowed Here!</Strong>
 {% endif %}
