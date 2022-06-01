@@ -30,6 +30,7 @@
             <a class="nav-link" href="#">COvid-19 Updates</a>
         </li>
 
+
         <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
@@ -60,6 +61,32 @@
                         <a class="nav-link active" aria-current="page" href="{%url 'home'%}"
                             class="btn btn-secondary">Home</a>
                     </li>
+                    <!-- Category View -->
+                    {% if user.is_authenticated %}
+                    {% if cat_menu %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Category
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                {% for item in cat_menu %}
+                        
+                                <a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a>
+                                {% endfor %}
+                                
+                        
+                            </li>
+                        </ul>
+
+                    </li>
+                    {% endif %}
+                    {% endif %}
+
+
+
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +113,7 @@
                                 <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
                                 <li><a class="dropdown-item" href="#">Mega Menu Link</a></li>
                             </ul>
-                        </div>
+                            </div>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
