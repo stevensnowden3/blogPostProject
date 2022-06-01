@@ -2,8 +2,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .forms import SingUpForm
+# from django.contrib.auth.forms import UserCreationForm, UserChangeForm, used previously as default forms
+from .forms import SingUpForm,EditProfileForm
 
 class UserRegistrationView(generic.CreateView):
     form_class = SingUpForm
@@ -12,7 +12,7 @@ class UserRegistrationView(generic.CreateView):
 
 
 class UserEditView(generic.UpdateView):
-    form_class = UserChangeForm
+    form_class = EditProfileForm
     template_name = 'registration/edit_profile.html'
     success_url = reverse_lazy('home')
 
