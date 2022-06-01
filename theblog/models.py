@@ -22,6 +22,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
+    snippet = models.CharField(max_length=500)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextUploadingField(blank=True, null=True)
     created_at = models.DateTimeField(default=datetime.now, blank=True)

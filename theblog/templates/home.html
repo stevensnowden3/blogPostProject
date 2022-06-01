@@ -20,7 +20,7 @@
         {% endif %}
     {% endif %}
         <br>
-        {{ post.body|safe|slice:":150"}}
+        {{ post.snippet}}
     </li>
 
     {% endfor %}
