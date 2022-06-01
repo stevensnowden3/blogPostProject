@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 # from django.contrib.auth.forms import UserCreationForm, UserChangeForm, used previously as default forms
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import SingUpForm,EditProfileForm
+from .forms import SingUpForm,EditProfileForm, PasswordChangingForm  
 from django.contrib.auth.views import PasswordChangeView
 
 
@@ -23,7 +23,8 @@ class UserEditView(generic.UpdateView):
         return self.request.user
 
 class PasswordsChangeView(PasswordChangeView):
-    form_class = PasswordChangeForm
+    # form_class = PasswordChangeForm //former
+    form_class = PasswordChangingForm
     success_url = reverse_lazy('password_success')
 
 def password_success(request):
