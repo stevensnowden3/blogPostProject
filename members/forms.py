@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm, Password
 from django.contrib.auth.models import User
 from django import forms
 from django.urls import reverse
-from theblog.models import Profile
+from theblog.models import Profile,Comment
 
 
 
@@ -62,4 +62,5 @@ class PasswordChangingForm(PasswordChangeForm):
     class Meta:
         model = User
         fields =  ('old_password', 'new_password1', 'new_password2')
+
 

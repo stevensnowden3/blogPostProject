@@ -45,9 +45,7 @@
 
  --{{ total_likes }} Likes
 </form>  
-<br><br>
-
-
+<br>
   <div class="card mb-3">
     <div class="row g-0">
       <div class="col-md-2">
@@ -73,6 +71,24 @@
       </div>
     </div>
   </div>
+  <hr>
+<h3>Comments...</h3>
+{% if not post.comments.all %}
+No coments Yet, Add one <a href="{% url 'add_comment' post.pk %}">Add a Comment</a>
+{% else %}
+<a href="{% url 'add_comment' post.pk %}">Add a Comment</a>
+<br>
+{% for comment in post.comments.all %}
+    <strong>{{comment.name}}</strong>
+    <strong>{{comment.date_added}}</strong>
+    {{comment.body}}
+  <br><br>
+{% endfor %}
+<hr>
+{% endif %}
+
+<br><br>
+<br><br>
 
     
 

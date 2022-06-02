@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 
-from theblog.models import Category, Post
-from .forms import PostForm
+from theblog.models import Category, Post,Comment
+from .forms import CommentForm, PostForm
 
 # def home(request):
 #     return render(request, 'home.html', {})
@@ -44,6 +44,21 @@ class ArticlaDetailView(DetailView):
         context["total_likes"] = total_likes
         context["liked"] = liked
         return context
+
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'add_comment.html'
+
+    def form_valid(self,form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+        
+    success_url = reverse_lazy('home')
+    
+
+
 
 
 class AddPostView(CreateView):
