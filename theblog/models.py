@@ -27,9 +27,6 @@ class Profile(models.Model):
     facebook = models.CharField(max_length=200,blank=True, null=True)
     twitter = models.CharField(max_length=200,blank=True, null=True)
 
-
-
-
     #adds to admin area
     def __str__(self):
         return str(self.user)
