@@ -17,7 +17,22 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
-  
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile")
+    website = models.CharField(max_length=200,blank=True, null=True)
+    facebook = models.CharField(max_length=200,blank=True, null=True)
+    twitter = models.CharField(max_length=200,blank=True, null=True)
+
+
+
+
+    #adds to admin area
+    def __str__(self):
+        return str(self.user)
 
 
 class Post(models.Model):
@@ -35,7 +50,7 @@ class Post(models.Model):
         return self.likes.count()
 
 
-
+#adds to admin area
     def __str__(self):
         return self.title + ' | ' + str(self.author)
 
