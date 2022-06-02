@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == profile.user.id %}
+<h1>Edit Profile Page </h1>
+<br><br>
+<div class="form-group" > 
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.media }}
+{{ form.as_p }}
+
+<button class="btn btn-secondary"> Update Profile Page</button> 
+
+
+
+{% else %}
+<Strong>You cant edit a Page You dont Own!!</Strong>
+<Strong>you are not ALLowed Here!</Strong>
+{% endif %}
+{% else %}
+<Strong>you are not ALLowed Here!</Strong>
+{% endif %}
+
+</form>
+</div>
+
+
+{% endblock %} 

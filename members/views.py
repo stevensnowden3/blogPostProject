@@ -17,6 +17,16 @@ class UserRegistrationView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
+class EditProfilePageView(generic.UpdateView):
+    model = Profile
+    template_name = 'registration/edit_profile_page.html'
+    success_url = reverse_lazy('home')
+    fields = ['bio','profile_pic','facebook','twitter','website']
+
+
+   
+
+        
 class ShowProfileView(DetailView):
     model = Profile
     template_name = 'registration/user_profile.html'
@@ -36,7 +46,7 @@ class UserEditView(generic.UpdateView):
     template_name = 'registration/edit_profile.html'
     success_url = reverse_lazy('home')
 
-    def get_object(self,):
+    def get_object(self):
         return self.request.user
 
 class PasswordsChangeView(PasswordChangeView):
