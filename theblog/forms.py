@@ -9,7 +9,7 @@ for item in choice:
 class   PostForm(forms.ModelForm):
     class Meta:
         model = Post    
-        fields = ('title', 'author','category',  'body' , 'snippet', 'created_at')
+        fields = ('title', 'author','category','header_image',  'body' , 'snippet', 'created_at')
 
         widgets = {
             'title' : forms.TextInput(attrs={'class' : 'form-control'}),

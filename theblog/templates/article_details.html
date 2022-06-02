@@ -14,6 +14,10 @@
 
 <br>
 <hr>
+{% if post.header_image %}
+    <img src="{{ post.header_image.url }}" alt="alt">
+{% endif %}
+<br><br>
 {{post.body|safe}}
 <br><br>
 <a href="{%url 'home'%}" class="btn btn-secondary">All Posts</a>
