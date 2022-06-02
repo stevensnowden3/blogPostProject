@@ -2,13 +2,26 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic  import DetailView
+from django.views.generic  import DetailView,CreateView
 # from django.contrib.auth.forms import UserCreationForm, UserChangeForm, used previously as default forms
 from django.contrib.auth.forms import PasswordChangeForm
 
 from theblog.models import Profile
-from .forms import SingUpForm,EditProfileForm, PasswordChangingForm  
+from .forms import SingUpForm,EditProfileForm, PasswordChangingForm,ProfilePageForm
 from django.contrib.auth.views import PasswordChangeView
+
+
+class CreateProfilePageView(CreateView):
+    model = Profile
+    form_class = ProfilePageForm
+    template_name = 'registration/create_user_profile_page.html'
+    # fields = '__all__'
+    # success_url = reverse_lazy('login')
+# making user id avaible when calling page..... replaced javascript code
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+        
 
 
 class UserRegistrationView(generic.CreateView):
