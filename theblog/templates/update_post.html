@@ -1,28 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 
 
 {% block content %}
 <br><br>
 
 {% if user.is_authenticated %}
-    {% if user.id == post.author.id %}
-    <h3>Delete</h3>
-    <div class="form-group">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.media }}
-            {{ form.as_p }}
-    
-            <button class="btn btn-secondary"> Update</button>
-{% else %}
-            <strong>You are not allowed here (And you Know it!!)</strong>
-        </form>
-    </div>
+{% if user.id == post.author.id %}
+<h3>Delete</h3>
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
 
-    {% endif %}
+        <button class="btn btn-secondary"> Update</button>
+        {% else %}
+        <strong>You are not allowed here (And you Know it!!)</strong>
+    </form>
+</div>
+
+{% endif %}
 {% endif %}
 
-    </form>
+</form>
 </div>
 
 
