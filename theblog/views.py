@@ -4,24 +4,23 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 
-from theblog.models import Category, Post,Comment
+from theblog.models import Category, Post, Comment
 from .forms import CommentForm, PostForm
 
 # def home(request):
 #     return render(request, 'home.html', {})
 
 
-
 class HomeView(ListView):
     model = Post
     template_name = 'home.html'
     # ordering = ['-id']
-    ordering = ['-created_at']
+    ordering = ['-created_at'][:3]
 
     # put this code on every view to get the functionality
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
-        context = super(HomeView,self).get_context_data(*args, **kwargs)
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
         context["cat_menu"] = cat_menu
         return context
 
@@ -30,12 +29,14 @@ class ArticlaDetailView(DetailView):
     model = Post
     template_name = 'article_details.html'
     # put this code on every view to get the functionality
+
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
-        context = super(ArticlaDetailView,self).get_context_data(*args, **kwargs)
+        context = super(ArticlaDetailView, self).get_context_data(
+            *args, **kwargs)
 
         stuff = get_object_or_404(Post, id=self.kwargs['pk'])
-        total_likes = stuff.total_likes() #check in modal.py for total likes fxn
+        total_likes = stuff.total_likes()  # check in modal.py for total likes fxn
         liked = False
         if stuff.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -51,14 +52,11 @@ class AddCommentView(CreateView):
     form_class = CommentForm
     template_name = 'add_comment.html'
 
-    def form_valid(self,form):
+    def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         return super().form_valid(form)
-        
+
     success_url = reverse_lazy('home')
-    
-
-
 
 
 class AddPostView(CreateView):

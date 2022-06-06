@@ -2,28 +2,70 @@
 
 
 {% block content %}
+{% load static %}
+
 <h1>Posts</h1>
+
 <ul>
     {% for post in object_list %}
     <li>
-        <a href="{% url 'article_details' post.pk %}">{{ post.title}}</a>( 
+        <a href="{% url 'article_details' post.pk %}">{{ post.title}}</a>(
         <a href="{% url 'category' post.category %}">
-        {{ post.category }}</a>)
-         --
+            {{ post.category }}</a>)
+        --
         {{ post.author.first_name }}
         {{ post.author.first_name }} --
         {{post.created_at}}
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
-            <a href="{% url 'update_post' post.pk %}">(Edit)</a>
-            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+        <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+        <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
         {% endif %}
-    {% endif %}
+        {% endif %}
         <br>
         {{ post.snippet}}
     </li>
 
     {% endfor %}
 </ul>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for post in object_list %}
+    {% if forloop.counter <= 4 %} <div class="col">
+        <div class="card h-100">
+            {% if post.header_image %}
+            <img src="{{post.header_image.url}}" class="img-fluid card-img-top rounded-start" alt=".d..">
+            {% else %}
+            <img src="{% static 'images/profile.jpeg' %}" class="img-fluid  card-img-top rounded-start" alt=".d..">
+            {% endif %}
+
+
+            <div class="card-body">
+
+                <h5 class="card-title">{{ post.title}}</h5>
+                <p class="card-text">
+                    {{ post.snippet}}
+                    {% if user.is_authenticated %}
+                    {% if user.id == post.author.id %}
+                    <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+                    <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+                    {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{post.created_at}}</small>
+            </div>
+        </div>
+</div>
+
+{% endif %}
+{% endfor %}
+
+
+
+
+</div>
 
 {% endblock %}
